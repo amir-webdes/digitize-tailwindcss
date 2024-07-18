@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./build/tailwind.css" />
+    <link rel="stylesheet" href="../src/css/tailwind.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <title>Digitiza app - Single Product</title>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Global div -->
+    <div class="max-w-[1440px] mx-auto px-4 pb-24 md:pb-6">
+      <!-- Header T-768px -->
+      <section
+        class="bg-white hidden md:flex justify-between shadow-md w-full mb-4 p-4 rounded-b-lg"
+      >
+        <div class="flex items-center gap-x-6 lg:gap-x-12 px-4 py-2 w-full">
+          <!-- Logo -->
+          <div class="w-1/12">
+            <img src="../assets/images/Logo-desktop.png" alt="" />
+          </div>
+          <!-- Menu -->
+          <div>
+            <ul
+              class="flex md:gap-x-6 lg:gap-x-10 font-bold md:text-sm lg:text-base"
+            >
+              <li class="cursor-pointer">
+                <a
+                  class="text-slate-800 hover:text-orange-500 transition-all duration-200"
+                  href="#"
+                  >خانه</a
+                >
+              </li>
+              <li class="cursor-pointer">
+                <a
+                  class="text-slate-800 hover:text-orange-500 transition-all duration-200"
+                  href="#"
+                  >تلفن همراه</a
+                >
+              </li>
+              <li class="cursor-pointer">
+                <a
+                  class="text-slate-800 hover:text-orange-500 transition-all duration-200"
+                  href="#"
+                  >لپ‌تاپ</a
+                >
+              </li>
+              <li class="cursor-pointer">
+                <a
+                  class="text-slate-800 hover:text-orange-500 transition-all duration-200"
+                  href="#"
+                  >ساعت هوشمند</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Search Box -->
+          <div
+            class="flex flex-1 items-center justify-start gap-x-4 bg-slate-100 rounded-lg px-4 py-2"
+          >
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5 lg:size-6 fill-slate-600 cursor-pointer"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+            <input
+              class="focus:outline-none bg-transparent w-full text-xs lg:text-sm placeholder:font-normal"
+              type="text"
+              placeholder="جستجوی نام محصول، نام برند، نام مدل و..."
+            />
+          </div>
+        </div>
+      </section>
+      <!-- AppBar -->
+      <section
+        class="flex md:hidden justify-between items-center w-full pt-8 pb-6"
+      >
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="size-8 bg-white p-1 rounded-md shadow-md fill-slate-800 cursor-pointer"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="font-black text-lg text-slate-800">
+          گوشی آیفون 13 - 128 گیگابایت
+        </div>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="size-8 bg-white p-1 rounded-md shadow-md fill-slate-800 cursor-pointer"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </section>
+      <!-- Primary content -->
+      <section
+        class="grid md:grid-cols-12 md:grid-rows-[50px_minmax(500px,_1fr)] gap-4"
+      >
+        <!-- Sidebar section -->
+        <div
+          class="bg-white hidden lg:block sticky top-4 lg:col-span-3 lg:row-span-2 lg:text-base lg:p-4 rounded-lg shadow-md h-fit"
+        >
+          <!-- sort by type -->
+          <div class="bg-white z-10">
+            <h3 class="text-orange-500 font-bold mt-2 mb-6">دسته‌بندی</h3>
+            <div x-data="{selected: 1}" class="buttons flex flex-col gap-y-6">
+              <!-- sort No.1 -->
+              <button
+                @click="selected = 1"
+                :class="selected === 1 ? 'bg-slate-100 rounded-lg p-1' : ''"
+                class="flex items-center gap-x-2"
+              >
+                <span class="relative">
+                  <span
+                    x-show="selected != 1"
+                    class="bg-gray-100 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                  ></span>
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  class="size-5 z-30"
+                >
+                  <path
+                    stroke="#1e293b"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.125"
+                    d="M13 4.75v7.5c0 3-.75 3.75-3.75 3.75h-4.5c-3 0-3.75-.75-3.75-3.75v-7.5C1 1.75 1.75 1 4.75 1h4.5c3 0 3.75.75 3.75 3.75ZM8.5 3.625h-3"
+                  />
+                  <path
+                    stroke="#1e293b"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.125"
+                    d="M7 13.825A1.163 1.163 0 1 0 7 11.5a1.163 1.163 0 0 0 0 2.325Z"
+                  />
+                </svg>
+                <span class="text-slate-800">تلفن همراه</span>
+              </button>
+
+              <!-- sort No.2 -->
+              <button
+                @click="selected = 2"
+                :class="selected === 2 ? 'bg-slate-100 rounded-lg p-1' : ''"
+                class="flex items-center gap-x-2"
+              >
+                <span class="relative text-slate-800">
+                  <span
+                    x-show="selected != 2"
+                    class="bg-gray-100 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                  ></span>
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  class="size-5 z-30"
+                >
+                  <path
+                    stroke="#1e293b"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.293 1.333H11.7c2.373 0 2.967.594 2.967 2.96v4.22c0 2.374-.594 2.96-2.96 2.96H4.293c-2.366.007-2.96-.586-2.96-2.953V4.294c0-2.367.594-2.96 2.96-2.96ZM8 11.48v3.187M1.333 8.666h13.334M5 14.666h6"
+                  />
+                </svg>
+                <span class="text-slate-800">لپ‌تاپ</span>
+              </button>
+
+              <!-- sort No.3 -->
+              <button
+                @click="selected = 3"
+                :class="selected === 3 ? 'bg-slate-100 rounded-lg p-1' : ''"
+                class="flex items-center gap-x-2"
+              >
+                <span class="relative text-slate-800">
+                  <span
+                    x-show="selected != 3"
+                    class="bg-gray-100 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                  ></span>
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  class="size-5 z-30"
+                >
+                  <path
+                    stroke="#1e293b"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    d="M5.666 12.667h4.667c1.553 0 2.333-.78 2.333-2.333V5.667c0-1.553-.78-2.333-2.333-2.333H5.666c-1.553 0-2.333.78-2.333 2.333v4.667c0 1.553.78 2.333 2.333 2.333ZM10.666 1.333H5.333M10.666 14.666H5.333"
+                  />
+                  <path
+                    stroke="#1e293b"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    d="M7.667 6.333v2h2"
+                  />
+                </svg>
+                <span class="text-slate-800">ساعت هوشمند</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bread Crumbs -->
+        <section
+          class="flex gap-2 md:bg-white items-center md:col-span-12 lg:col-span-9 md:px-4 md:rounded-lg md:shadow-md"
+        >
+          <!-- parent -->
+          <span class="flex items-center gap-2">
+            <p class="text-orange-600 cursor-pointer">تلفن همراه</p>
+            <span class="text-slate-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </span>
+          <!-- child -->
+          <span class="flex items-center gap-2">
+            <p class="text-orange-600 cursor-pointer">آیفون</p>
+            <span class="text-slate-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </span>
+          <!-- target -->
+          <span class="flex gap-2 text-slate-600">آیفون 13</span>
+        </section>
+
+        <!-- Product details -->
+        <div
+          class="md:bg-white rounded-lg grid md:flex md:flex-wrap md:col-span-12 lg:col-span-9 gap-y-6 w-full mx-auto p-4 shadow-md"
+        >
+          <!-- photo -->
+          <div class="md:w-1/3 mx-auto pl-4">
+            <img src="../assets/images/iphone13-128G.png" alt="iphone13-128G" />
+            <!-- mini images -->
+            <div class="hidden md:flex w-5/6 gap-4 justify-between mx-auto">
+              <span
+                class="border-2 border-gray-300 h-20 w-2/6 p-1 rounded-lg cursor-pointer"
+              >
+                <img
+                  src="../assets/images/mini-1.png"
+                  class="w-full h-full rounded-md"
+                  alt=""
+                />
+              </span>
+              <span
+                class="border-2 border-gray-300 h-20 w-2/6 p-2 rounded-lg cursor-pointer"
+              >
+                <img
+                  src="../assets/images/mini-2.png"
+                  class="w-full h-full rounded-md"
+                  alt=""
+                />
+              </span>
+              <span
+                class="border-2 border-gray-300 h-20 w-2/6 p-2 rounded-lg cursor-pointer"
+              >
+                <img
+                  src="../assets/images/mini-3.png"
+                  class="w-full h-full rounded-md"
+                  alt=""
+                />
+              </span>
+            </div>
+          </div>
+          <!-- */* -->
+          <div class="grid md:w-1/3">
+            <!-- icon & terget -->
+            <button class="hidden md:flex items-center gap-x-2 w-fit mt-8">
+              <span class="relative">
+                <span
+                  class="bg-orange-100 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                ></span>
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                class="size-5 z-30"
+              >
+                <path
+                  stroke="#f97316"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.125"
+                  d="M13 4.75v7.5c0 3-.75 3.75-3.75 3.75h-4.5c-3 0-3.75-.75-3.75-3.75v-7.5C1 1.75 1.75 1 4.75 1h4.5c3 0 3.75.75 3.75 3.75ZM8.5 3.625h-3"
+                />
+                <path
+                  stroke="#f97316"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.125"
+                  d="M7 13.825A1.163 1.163 0 1 0 7 11.5a1.163 1.163 0 0 0 0 2.325Z"
+                />
+              </svg>
+              <span class="text-orange-500">تلفن همراه اپل</span>
+            </button>
+            <!-- title -->
+            <div
+              class="grid justify-center md:justify-start item center md:min-w-full gap-2 py-4"
+            >
+              <p class="font-bold text-lg">گوشی آیفون 13 - 128 گیگابایت</p>
+              <p class="text-base text-slate-500 text-center md:text-right">
+                Apple Iphone 13 - 128G
+              </p>
+            </div>
+            <hr class="hidden md:block bg-gray-300 w-full" />
+            <!-- color selection -->
+            <div
+              class="flex justify-around md:justify-start md:gap-x-8 items-center py-8"
+            >
+              <span class="font-medium text-lg">انتخاب رنگ:</span>
+              <span>
+                <div x-data="{color: 'green'}" class="flex gap-x-0.5">
+                  <!-- white -->
+                  <button
+                    @click="color = 'white'"
+                    :class="color === 'white' ? 'ring-2 ring-offset-0.5 ring-white' : ''"
+                    class="bg-white w-7 h-7 rounded-full -mr-2 border-2 border-gray-100 flex justify-center items-center text-white cursor-pointer"
+                  >
+                    <svg
+                      x-show="color === 'white'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="#1e293b"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <!-- black -->
+                  <button
+                    @click="color = 'black'"
+                    :class="color === 'black' ? 'ring-2 ring-offset-0.5 ring-black' : ''"
+                    class="bg-black w-7 h-7 rounded-full -mr-2 border-2 border-gray-100 flex justify-center items-center text-white cursor-pointer"
+                  >
+                    <svg
+                      x-show="color === 'black'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <!-- red -->
+                  <button
+                    @click="color = 'red'"
+                    :class="color === 'red' ? 'ring-2 ring-offset-0.5 ring-red-500' : ''"
+                    class="bg-red-500 w-7 h-7 rounded-full flex justify-center -mr-2 border-2 border-gray-100 items-center text-white cursor-pointer"
+                  >
+                    <svg
+                      x-show="color === 'red'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <!-- blue -->
+                  <button
+                    @click="color = 'blue'"
+                    :class="color === 'blue' ? 'ring-2 ring-offset-0.5 ring-blue-500' : ''"
+                    class="bg-blue-500 w-7 h-7 rounded-full border-2 border-gray-100 -mr-2 flex justify-center items-center text-white cursor-pointer"
+                  >
+                    <svg
+                      x-show="color === 'blue'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <!-- green -->
+                  <button
+                    @click="color = 'green'"
+                    :class="color === 'green' ? 'ring-2 ring-offset-0.5 ring-green-500' : ''"
+                    class="bg-green-500 w-7 h-7 rounded-full -mr-2 border-2 border-gray-100 flex justify-center items-center text-white cursor-pointer"
+                  >
+                    <svg
+                      x-show="color === 'green'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </span>
+            </div>
+            <!-- Mobile: saler, garanties, post... -->
+            <div class="flex md:hidden justify-evenly flex-wrap gap-4">
+              <!-- saler -->
+              <div class="flex">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.25"
+                      stroke="currentColor"
+                      class="size-5 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z"
+                      />
+                    </svg>
+                    <span class="font-medium text-sm">فروشنده:</span>
+                    <span class="text-sm">دیجی‌تایز</span>
+                  </div>
+                </div>
+              </div>
+              <!-- garanties -->
+              <div class="flex">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.25"
+                      stroke="currentColor"
+                      class="size-6 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+                      />
+                    </svg>
+
+                    <span class="font-medium text-sm">گارانتی:</span>
+                    <span class="text-sm">18 ماه زرین خدمت</span>
+                  </div>
+                </div>
+              </div>
+              <!-- post -->
+              <div class="flex">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-5 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                      />
+                    </svg>
+
+                    <span class="font-medium text-sm">ارسال توسط:</span>
+                    <span class="text-sm">انبار تهران</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- other datails -->
+            <div
+              class="bg-white w-full grid p-4 md:p-0 gap-4 md:gap-2 rounded-lg mt-8 md:mt-2"
+            >
+              <h3 class="font-bold text-lg pb-2">ویژگی های کالا:</h3>
+              <!-- No.1 -->
+              <div class="grid gap-2">
+                <span class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#f97316"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#f97316"
+                    class="size-3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  <p>حافظه داخلی:</p>
+                </span>
+                <span class="font-bold text-lg">128 گیگابایت</span>
+              </div>
+              <!-- No.2 -->
+              <div class="grid gap-2">
+                <span class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#f97316"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#f97316"
+                    class="size-3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  <p>بازه اندازه صفحه نمایش:</p>
+                </span>
+                <span class="font-bold text-lg">0.6 اینچ و بزرگتر</span>
+              </div>
+              <!-- No.3 -->
+              <div class="grid gap-2">
+                <span class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#f97316"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#f97316"
+                    class="size-3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  <p>شبکه های ارتباطی:</p>
+                </span>
+                <span class="font-bold text-lg">5G - 4G - 3G</span>
+              </div>
+            </div>
+          </div>
+          <!-- Desktop: saler, garanties, post... -->
+          <section class="hidden md:flex justify-end md:w-1/3 h-fit">
+            <div
+              class="bg-gray-50 grid gap-6 px-4 pt-8 pb-4 rounded-lg w-[85%]"
+            >
+              <!-- saler -->
+              <div class="flex min-w-30">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.25"
+                      stroke="currentColor"
+                      class="size-5 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z"
+                      />
+                    </svg>
+                    <span class="font-medium text-sm">فروشنده:</span>
+                    <span class="text-sm">دیجی‌تایز</span>
+                  </div>
+                </div>
+              </div>
+              <!-- garanties -->
+              <div class="flex min-w-30">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.25"
+                      stroke="currentColor"
+                      class="size-6 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+                      />
+                    </svg>
+
+                    <span class="font-medium text-sm">گارانتی:</span>
+                    <span class="text-sm">18 ماه زرین خدمت</span>
+                  </div>
+                </div>
+              </div>
+              <!-- post -->
+              <div class="flex min-w-30">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-x-2">
+                    <span class="relative text-slate-800">
+                      <span
+                        class="bg-gray-200 rounded-full absolute -top-5 -right-0 w-6 h-6 z-20"
+                      ></span>
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-5 z-30"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                      />
+                    </svg>
+
+                    <span class="font-medium text-sm">ارسال توسط:</span>
+                    <span class="text-sm">انبار تهران</span>
+                  </div>
+                </div>
+              </div>
+              <!-- price & btn -->
+              <div class="flex flex-col w-full gap-2 mt-4">
+                <span class="self-end text-xl text-orange-500"
+                  >59/900/000 تومان</span
+                >
+                <button
+                  class="w-full bg-orange-500 text-white font-medium rounded-lg cursor-pointer py-2 hover:bg-orange-600 transition-all duration-300"
+                >
+                  اضافه به سبد خرید
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- Review product -->
+          <div class="bg-white grid p-4 rounded-lg">
+            <h3 class="text-lg font-bold">نقد و بررسی محصول:</h3>
+            <div class="my-4">
+              آیفون 13 جدیدترین محصول اپل برای بازار گوشی‌های هوشمند است که
+              می‌خواهد رقبای اندرویدی‌اش را به چالش بکشد. این خانواده از
+              گوشی‌های اپل شامل ۴ مدل آیفون ۱۳، ۱۳ مینی، 13 پرو و 13 پرو مکس
+              می‌شود که با وجود تفاوت‌ها، شباهت‌هایی هم با یکدیگر دارند. آیفون
+              13 جدیدترین محصول اپل برای بازار گوشی‌های هوشمند است که می‌خواهد
+              رقبای اندرویدی‌اش را به چالش بکشد. این خانواده از گوشی‌های اپل
+              شامل ۴ مدل آیفون ۱۳، ۱۳ مینی، 13 پرو و 13 پرو مکس می‌شود که با
+              وجود تفاوت‌ها، شباهت‌هایی هم با یکدیگر دارند.
+            </div>
+            <button class="md:hidden text-orange-500 font-bold text-left ml-4">
+              ادامه مطلب
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- End Global div -->
+    <!-- Bottom Navigation  -->
+    <div
+      class="bg-white md:hidden flex items-center justify-between gap-4 px-6 py-4 fixed bottom-0 right-0 left-0 w-full shadow-xl shadow-black rounded-t-xl z-50"
+    >
+      <div class="w-2/3">
+        <button
+          class="bg-orange-500 text-white w-full py-3 rounded-lg"
+          type="button"
+        >
+          اضافه به سبد خرید
+        </button>
+      </div>
+      <div class="grid">
+        <span class="text-xl font-medium">59/900/000</span>
+        <span>تومان</span>
+      </div>
+    </div>
+    <!-- Footer section -->
+    <section class="hidden md:block px-4 max-w-[1440px] mx-auto">
+      <div
+        class="flex flex-col lg:flex-row bg-white rounded-t-lg shadow-md w-full gap-8 mx-auto p-8"
+      >
+        <!-- branding -->
+        <div class="flex flex-col md:w-full lg:w-1/2 gap-y-4">
+          <!-- logo -->
+          <div class="flex gap-2 items-center">
+            <img
+              class="md:w-24 lg:w-28 h-auto"
+              src="../assets/images/Logo-desktop.png"
+            />
+            <div class="bg-orange-500 w-12 h-1 rounded-full"></div>
+          </div>
+          <!-- text -->
+          <div class="lg:pl-8">
+            <p>
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
+              جامعه و متخصصان را می طلبد.
+            </p>
+          </div>
+        </div>
+        <!-- access & contact -->
+        <div class="flex justify-between items-end md:w-full lg:w-1/2">
+          <!-- access -->
+          <div class="flex flex-col gap-4">
+            <span
+              ><a
+                class="font-bold hover:text-orange-500 transition-all duration-300"
+                href="#"
+                >محصولات</a
+              ></span
+            >
+            <span
+              ><a
+                class="hover:text-orange-500 transition-all duration-300"
+                href="#"
+                >تلفن همراه</a
+              ></span
+            >
+            <span
+              ><a
+                class="hover:text-orange-500 transition-all duration-300"
+                href="#"
+                >لپ‌تاپ</a
+              ></span
+            >
+            <span
+              ><a
+                class="hover:text-orange-500 transition-all duration-300"
+                href="#"
+                >ساعت هوشمند</a
+              ></span
+            >
+          </div>
+          <!-- contact -->
+          <div class="flex gap-8 lg:gap-2">
+            <!-- phone & email -->
+            <div class="flex flex-col gap-4 justify-end items-end">
+              <span class="flex items-center gap-2">
+                <p>021-123456</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#f97316"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#f97316"
+                  class="size-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                  />
+                </svg>
+              </span>
+              <span class="flex items-center gap-2">
+                <p>digitize@gmail.com</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="#f97316"
+                  class="size-5"
+                >
+                  <path
+                    d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"
+                  />
+                  <path
+                    d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <!-- map -->
+            <div class="w-40 h-40 rounded-3xl overflow-hidden">
+              <img src="../assets/images/map.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

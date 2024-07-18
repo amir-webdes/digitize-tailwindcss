@@ -1,0 +1,9 @@
+@import url("/src/css/fonts.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+p {
+  color: #1e293b;
+}
